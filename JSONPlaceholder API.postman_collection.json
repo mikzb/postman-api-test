@@ -1,0 +1,2314 @@
+{
+	"info": {
+		"_postman_id": "54272c8d-52e8-439c-8356-fe034e0d8baf",
+		"name": "JSONPlaceholder API",
+		"description": "A complete collection of all JSONPlaceholder API endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39538410"
+	},
+	"item": [
+		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "Get all posts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body schema/properties\r",
+									"pm.test(\"First post in response should have specific properties\", function () {\r",
+									"    const firstPost = pm.response.json()[0]; // Get the first post\r",
+									"    pm.expect(firstPost).to.have.property('userId');\r",
+									"    pm.expect(firstPost).to.have.property('id');\r",
+									"    pm.expect(firstPost).to.have.property('title');\r",
+									"    pm.expect(firstPost).to.have.property('body');\r",
+									"});\r",
+									"\r",
+									"// Test for response headers (content-type)\r",
+									"pm.test(\"Content-Type is present and application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/posts",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a specific post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body schema/properties\r",
+									"pm.test(\"Response body should have specific properties\", function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('userId');\r",
+									"    pm.expect(pm.response.json()).to.have.property('id');\r",
+									"    pm.expect(pm.response.json()).to.have.property('title');\r",
+									"    pm.expect(pm.response.json()).to.have.property('body');\r",
+									"});\r",
+									"\r",
+									"// Test for response headers (content-type)\r",
+									"pm.test(\"Content-Type is present and application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/posts/1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Basic test for status code\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Basic test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Basic test for response body properties\r",
+									"pm.test(\"Response body has 'id' property\", function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('id');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body has 'title' property\", function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('title');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body has 'body' property\", function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('body');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body has 'userId' property\", function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('userId');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"foo\",\n    \"body\": \"bar\",\n    \"userId\": 1\n}"
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/posts",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.lessThan(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body properties\r",
+									"pm.test(\"Response body has updated title\", function () {\r",
+									"    pm.expect(pm.response.json().title).to.eql(\"foo updated\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body has updated body\", function () {\r",
+									"    pm.expect(pm.response.json().body).to.eql(\"bar updated\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"title\": \"foo updated\",\n    \"body\": \"bar updated\",\n    \"userId\": 1\n}"
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/posts/1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch a post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body properties\r",
+									"pm.test(\"Response body has updated title\", function () {\r",
+									"    pm.expect(pm.response.json().title).to.eql(\"foo patched\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"foo patched\"\n}"
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/posts/1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/posts/1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter posts by userId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body schema/properties\r",
+									"pm.test(\"Response body should have specific properties\", function () {\r",
+									"    const first = pm.response.json()[0];\r",
+									"    pm.expect(first).to.have.property('userId');\r",
+									"    pm.expect(first).to.have.property('id');\r",
+									"    pm.expect(first).to.have.property('title');\r",
+									"    pm.expect(first).to.have.property('body');\r",
+									"});\r",
+									"\r",
+									"// Test for response headers (content-type)\r",
+									"pm.test(\"Content-Type is present and application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/posts?userId=1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"posts"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get comments for a post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body schema/properties\r",
+									"pm.test(\"Response body should have specific properties\", function () {\r",
+									"    const first = pm.response.json()[0];\r",
+									"    pm.expect(first).to.have.property('postId');\r",
+									"    pm.expect(first).to.have.property('id');\r",
+									"    pm.expect(first).to.have.property('name');\r",
+									"    pm.expect(first).to.have.property('body');\r",
+									"    pm.expect(first).to.have.property('email');\r",
+									"});\r",
+									"\r",
+									"// Test for response headers (content-type)\r",
+									"pm.test(\"Content-Type is present and application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/posts/1/comments",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"posts",
+								"1",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "Get all comments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body schema/properties\r",
+									"pm.test(\"Response body should have specific properties\", function () {\r",
+									"    const first = pm.response.json()[0];\r",
+									"    pm.expect(first).to.have.property('postId');\r",
+									"    pm.expect(first).to.have.property('id');\r",
+									"    pm.expect(first).to.have.property('name');\r",
+									"    pm.expect(first).to.have.property('email');\r",
+									"    pm.expect(first).to.have.property(\"body\");\r",
+									"});\r",
+									"\r",
+									"// Test for response headers (content-type)\r",
+									"pm.test(\"Content-Type is present and application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/comments",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a specific comment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body schema/properties\r",
+									"pm.test(\"Response body should have specific properties\", function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('postId');\r",
+									"    pm.expect(pm.response.json()).to.have.property('id');\r",
+									"    pm.expect(pm.response.json()).to.have.property('name');\r",
+									"    pm.expect(pm.response.json()).to.have.property('email');\r",
+									"    pm.expect(pm.response.json()).to.have.property('body');\r",
+									"});\r",
+									"\r",
+									"// Test for response headers (content-type)\r",
+									"pm.test(\"Content-Type is present and application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/comments/1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"comments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter comments by postId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body schema/properties\r",
+									"pm.test(\"Response body should have specific properties\", function () {\r",
+									"    const first = pm.response.json()[0];\r",
+									"    pm.expect(first).to.have.property('postId');\r",
+									"    pm.expect(first).to.have.property('id');\r",
+									"    pm.expect(first).to.have.property('name');\r",
+									"    pm.expect(first).to.have.property('email');\r",
+									"    pm.expect(first).to.have.property('body');\r",
+									"});\r",
+									"\r",
+									"// Test for response headers (content-type)\r",
+									"pm.test(\"Content-Type is present and application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/comments?postId=1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"comments"
+							],
+							"query": [
+								{
+									"key": "postId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Albums",
+			"item": [
+				{
+					"name": "Get all albums",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body schema/properties\r",
+									"pm.test(\"Response body should have specific properties\", function () {\r",
+									"    const first = pm.response.json()[0];\r",
+									"    pm.expect(first).to.have.property('userId');\r",
+									"    pm.expect(first).to.have.property('id');\r",
+									"    pm.expect(first).to.have.property('title');\r",
+									"});\r",
+									"\r",
+									"// Test for response headers (content-type)\r",
+									"pm.test(\"Content-Type is present and application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/albums",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"albums"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a specific album",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body schema/properties\r",
+									"pm.test(\"Response body should have specific properties\", function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('userId');\r",
+									"    pm.expect(pm.response.json()).to.have.property('id');\r",
+									"    pm.expect(pm.response.json()).to.have.property('title');\r",
+									"});\r",
+									"\r",
+									"// Test for response headers (content-type)\r",
+									"pm.test(\"Content-Type is present and application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/albums/1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"albums",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create an album",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 201 Created\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.lessThan(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body properties\r",
+									"pm.test(\"Response body has property 'id'\", function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('id');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body has property 'title'\", function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('title');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body has property 'userId'\", function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('userId');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"foo\",\n    \"userId\": 1\n}"
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/albums",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"albums"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an album",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body properties\r",
+									"pm.test(\"Response body has updated title\", function () {\r",
+									"    pm.expect(pm.response.json().title).to.eql(\"foo updated\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"title\": \"foo updated\",\n    \"userId\": 1\n}"
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/albums/1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"albums",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch an album",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body properties\r",
+									"pm.test(\"Response body has title property\", function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('title');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"foo patched\"\n}"
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/albums/1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"albums",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an album",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/albums/1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"albums",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter albums by userId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body schema/properties\r",
+									"pm.test(\"Response body should have specific properties\", function () {\r",
+									"    const first = pm.response.json()[0];\r",
+									"    pm.expect(first).to.have.property('userId');\r",
+									"    pm.expect(first).to.have.property('id');\r",
+									"    pm.expect(first).to.have.property('title');\r",
+									"});\r",
+									"\r",
+									"\r",
+									"// Test for response headers (content-type)\r",
+									"pm.test(\"Content-Type is present and application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/albums?userId=1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"albums"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get photos for an album",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body schema/properties\r",
+									"pm.test(\"Response body should have specific properties\", function () {\r",
+									"    const first = pm.response.json()[0];\r",
+									"    pm.expect(first).to.have.property('albumId');\r",
+									"    pm.expect(first).to.have.property('id');\r",
+									"    pm.expect(first).to.have.property('title');\r",
+									"    pm.expect(first).to.have.property('url');\r",
+									"    pm.expect(first).to.have.property('thumbnailUrl');\r",
+									"});\r",
+									"\r",
+									"// Test for response headers (content-type)\r",
+									"pm.test(\"Content-Type is present and application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/albums/1/photos",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"albums",
+								"1",
+								"photos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Photos",
+			"item": [
+				{
+					"name": "Get all photos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body schema/properties\r",
+									"pm.test(\"Response body should have specific properties\", function () {\r",
+									"    const first = pm.response.json()[0];\r",
+									"    pm.expect(first).to.have.property('albumId');\r",
+									"    pm.expect(first).to.have.property('id');\r",
+									"    pm.expect(first).to.have.property('title');\r",
+									"    pm.expect(first).to.have.property('url');\r",
+									"    pm.expect(first).to.have.property('thumbnailUrl');\r",
+									"});\r",
+									"\r",
+									"// Test for response headers (content-type)\r",
+									"pm.test(\"Content-Type is present and application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/photos",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"photos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a specific photo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body schema/properties\r",
+									"pm.test(\"Response body should have specific properties\", function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('albumId');\r",
+									"    pm.expect(pm.response.json()).to.have.property('id');\r",
+									"    pm.expect(pm.response.json()).to.have.property('title');\r",
+									"    pm.expect(pm.response.json()).to.have.property('url');\r",
+									"    pm.expect(pm.response.json()).to.have.property('thumbnailUrl');\r",
+									"});\r",
+									"\r",
+									"// Test for response headers (content-type)\r",
+									"pm.test(\"Content-Type is present and application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/photos/1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"photos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter photos by albumId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body schema/properties\r",
+									"pm.test(\"Response body should have specific properties\", function () {\r",
+									"    const first = pm.response.json()[0];\r",
+									"    pm.expect(first).to.have.property('albumId');\r",
+									"    pm.expect(first).to.have.property('id');\r",
+									"    pm.expect(first).to.have.property('title');\r",
+									"    pm.expect(first).to.have.property('url');\r",
+									"    pm.expect(first).to.have.property('thumbnailUrl');\r",
+									"});\r",
+									"\r",
+									"// Test for response headers (content-type)\r",
+									"pm.test(\"Content-Type is present and application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/photos?albumId=1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"photos"
+							],
+							"query": [
+								{
+									"key": "albumId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Todos",
+			"item": [
+				{
+					"name": "Get all todos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body schema/properties\r",
+									"pm.test(\"Response body should have specific properties\", function () {\r",
+									"    const first = pm.response.json()[0];\r",
+									"    pm.expect(first).to.have.property('userId');\r",
+									"    pm.expect(first).to.have.property('id');\r",
+									"    pm.expect(first).to.have.property('title');\r",
+									"    pm.expect(first).to.have.property('completed');\r",
+									"});\r",
+									"\r",
+									"// Test for response headers (content-type)\r",
+									"pm.test(\"Content-Type is present and application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/todos",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a specific todo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body schema/properties\r",
+									"pm.test(\"Response body should have specific properties\", function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('userId');\r",
+									"    pm.expect(pm.response.json()).to.have.property('id');\r",
+									"    pm.expect(pm.response.json()).to.have.property('title');\r",
+									"    pm.expect(pm.response.json()).to.have.property('completed');\r",
+									"});\r",
+									"\r",
+									"// Test for response headers (content-type)\r",
+									"pm.test(\"Content-Type is present and application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/todos/1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"todos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a todo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body properties\r",
+									"pm.test(\"Response body has property 'id'\", function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('id');\r",
+									"});\r",
+									"\r",
+									"// Test for response headers\r",
+									"pm.test(\"Response has Content-Type header\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.exist;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"foo\",\n    \"completed\": false,\n    \"userId\": 1\n}"
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/todos",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a todo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body properties\r",
+									"pm.test(\"Response body has id, title, completed, and userId\", function () {\r",
+									"    pm.expect(pm.response.json()).to.have.all.keys('id', 'title', 'completed', 'userId');\r",
+									"});\r",
+									"\r",
+									"// Test for response headers\r",
+									"pm.test(\"Content-Type is present in the response headers\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"title\": \"foo updated\",\n    \"completed\": true,\n    \"userId\": 1\n}"
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/todos/1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"todos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch a todo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Status code test\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Response time test\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Response body properties test\r",
+									"pm.test(\"Response body has 'id' property\", function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('id');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body has 'title' property\", function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('title');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"completed\": true\n}"
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/todos/1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"todos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a todo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/todos/1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"todos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter todos by userId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body schema/properties\r",
+									"pm.test(\"Response body should have specific properties\", function () {\r",
+									"    const first = pm.response.json()[0];\r",
+									"    pm.expect(first).to.have.property('userId');\r",
+									"    pm.expect(first).to.have.property('id');\r",
+									"    pm.expect(first).to.have.property('title');\r",
+									"    pm.expect(first).to.have.property('completed');\r",
+									"});\r",
+									"\r",
+									"// Test for response headers (content-type)\r",
+									"pm.test(\"Content-Type is present and application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/todos?userId=1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"todos"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter todos by completed status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body schema/properties\r",
+									"pm.test(\"Response body should have specific properties\", function () {\r",
+									"    const first = pm.response.json()[0];\r",
+									"    pm.expect(first).to.have.property('userId');\r",
+									"    pm.expect(first).to.have.property('id');\r",
+									"    pm.expect(first).to.have.property('title');\r",
+									"    pm.expect(first).to.have.property('completed');\r",
+									"});\r",
+									"// Test for response headers (content-type)\r",
+									"pm.test(\"Content-Type is present and application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/todos?completed=false",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"todos"
+							],
+							"query": [
+								{
+									"key": "completed",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get all users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body schema/properties\r",
+									"pm.test(\"Response body should have specific properties for the first item\", function () {\r",
+									"    const first = pm.response.json()[0];\r",
+									"    pm.expect(first).to.have.property('id');\r",
+									"    pm.expect(first).to.have.property('name');\r",
+									"    pm.expect(first).to.have.property('username');\r",
+									"    pm.expect(first).to.have.property('email');\r",
+									"    pm.expect(first).to.have.property('address');\r",
+									"    pm.expect(first).to.have.property('phone');\r",
+									"    pm.expect(first).to.have.property('website');\r",
+									"    pm.expect(first).to.have.property('company');\r",
+									"});\r",
+									"\r",
+									"// Test for response headers (content-type)\r",
+									"pm.test(\"Content-Type is present and application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/users",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a specific user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body schema/properties\r",
+									"pm.test(\"Response body should have specific properties\", function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('id');\r",
+									"    pm.expect(pm.response.json()).to.have.property('name');\r",
+									"    pm.expect(pm.response.json()).to.have.property('username');\r",
+									"    pm.expect(pm.response.json()).to.have.property('email');\r",
+									"    pm.expect(pm.response.json()).to.have.property('address');\r",
+									"    pm.expect(pm.response.json()).to.have.property('phone');\r",
+									"    pm.expect(pm.response.json()).to.have.property('website');\r",
+									"    pm.expect(pm.response.json()).to.have.property('company');\r",
+									"});\r",
+									"\r",
+									"// Test for response headers (content-type)\r",
+									"pm.test(\"Content-Type is present and application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/users/1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Basic test for status code\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Basic test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Basic test for response body properties\r",
+									"pm.test(\"Response body has required properties\", function () {\r",
+									"    pm.response.to.have.jsonBody('name');\r",
+									"    pm.response.to.have.jsonBody('username');\r",
+									"    pm.response.to.have.jsonBody('email');\r",
+									" pm.response.to.have.jsonBody('id');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John Doe\",\n    \"username\": \"johndoe\",\n    \"email\": \"john@example.com\"\n}"
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/users",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body properties\r",
+									"pm.test(\"Response body has updated user details\", function () {\r",
+									"    pm.expect(pm.response.json().name).to.eql(\"John Doe Updated\");\r",
+									"    pm.expect(pm.response.json().username).to.eql(\"johndoe\");\r",
+									"    pm.expect(pm.response.json().email).to.eql(\"john@example.com\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"name\": \"John Doe Updated\",\n    \"username\": \"johndoe\",\n    \"email\": \"john@example.com\"\n}"
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/users/1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch a user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for updated user name in the response\r",
+									"pm.test(\"User name is updated\", function () {\r",
+									"    pm.expect(pm.response.json().name).to.eql(\"John Doe Patched\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John Doe Patched\"\n}"
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/users/1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response headers (content-type)\r",
+									"pm.test(\"Content-Type is present and is application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/users/1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter users by username",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body schema/properties\r",
+									"// Test for response body schema/properties\r",
+									"pm.test(\"Response body should have specific properties for the first item\", function () {\r",
+									"    const first = pm.response.json()[0];\r",
+									"    pm.expect(first).to.have.property('id');\r",
+									"    pm.expect(first).to.have.property('name');\r",
+									"    pm.expect(first).to.have.property('username');\r",
+									"    pm.expect(first).to.have.property('email');\r",
+									"    pm.expect(first).to.have.property('address');\r",
+									"    pm.expect(first).to.have.property('phone');\r",
+									"    pm.expect(first).to.have.property('website');\r",
+									"    pm.expect(first).to.have.property('company');\r",
+									"});\r",
+									"\r",
+									"// Test for response headers (content-type)\r",
+									"pm.test(\"Content-Type is present and application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/users?username=Bret",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "Bret"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get posts by user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body schema/properties\r",
+									"pm.test(\"Response body should have specific properties\", function () {\r",
+									"    const first = pm.response.json()[0];\r",
+									"    pm.expect(first).to.have.property('userId');\r",
+									"    pm.expect(first).to.have.property('id');\r",
+									"    pm.expect(first).to.have.property('title');\r",
+									"    pm.expect(first).to.have.property('body');\r",
+									"});\r",
+									"\r",
+									"// Test for response headers (content-type)\r",
+									"pm.test(\"Content-Type is present and application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/users/1/posts",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"users",
+								"1",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get albums by user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body schema/properties\r",
+									"pm.test(\"Response body should have specific properties\", function () {\r",
+									"    const first = pm.response.json()[0];\r",
+									"    pm.expect(first).to.have.property('userId');\r",
+									"    pm.expect(first).to.have.property('id');\r",
+									"    pm.expect(first).to.have.property('title');\r",
+									"});\r",
+									"\r",
+									"// Test for response headers (content-type)\r",
+									"pm.test(\"Content-Type is present and application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/users/1/albums",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"users",
+								"1",
+								"albums"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get todos by user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response time\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"// Test for response body schema/properties\r",
+									"pm.test(\"Response body should have specific properties\", function () {\r",
+									"    const first = pm.response.json()[0];\r",
+									"    pm.expect(first).to.have.property('userId');\r",
+									"    pm.expect(first).to.have.property('id');\r",
+									"    pm.expect(first).to.have.property('title');\r",
+									"    pm.expect(first).to.have.property('completed');\r",
+									"});\r",
+									"\r",
+									"// Test for response headers (content-type)\r",
+									"pm.test(\"Content-Type is present and application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/users/1/todos",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"users",
+								"1",
+								"todos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
